@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Rage: Cyber Hunt</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="uiContainer">
+        <div id="healthBar">
+            <div id="healthFill"></div>
+        </div>
+        <div id="scoreDisplay">SCORE: 0</div>
+        <div id="comboCounter">COMBO x0</div>
+        <div id="bulletTimeIndicator">
+            <div id="bulletTimeFill"></div>
+        </div>
+    </div>
+    
+    <div id="startScreen">
+        <h1 id="gameTitle">NEON RAGE<br>CYBER HUNT</h1>
+        <button id="startButton">START MISSION</button>
+        <div id="controlsInfo">
+            <p>WASD: Move | SPACE: Jump | MOUSE: Aim</p>
+            <p>LEFT CLICK: Slash | RIGHT CLICK: Shoot</p>
+            <p>SHIFT: Bullet Time | R: Grappling Hook</p>
+            <p>Chain attacks for insane combos!</p>
+        </div>
+    </div>
+    
+    <div id="gameOverScreen">
+        <h1 id="gameOverText">MISSION FAILED</h1>
+        <button id="restartButton">RETRY</button>
+        <div id="finalScore">FINAL SCORE: 0</div>
+    </div>
+    
+    <div id="mobileControls">
+        <div id="dpad">
+            <div id="upBtn" class="mobile-btn">↑</div>
+            <div id="leftBtn" class="mobile-btn">←</div>
+            <div id="downBtn" class="mobile-btn">↓</div>
+            <div id="rightBtn" class="mobile-btn">→</div>
+        </div>
+        <div id="actionBtns">
+            <div id="jumpBtn" class="mobile-btn">⤴</div>
+            <div id="attackBtn" class="mobile-btn">⚔</div>
+            <div id="bulletTimeBtn" class="mobile-btn">⌛</div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="manifest.json">
+</body>
+</html>

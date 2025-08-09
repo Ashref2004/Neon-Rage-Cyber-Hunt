@@ -1,0 +1,22 @@
+{
+    "name": "Neon Rage: Cyber Hunt",
+    "short_name": "NeonRage",
+    "description": "Futuristic cyberpunk hack-and-slash action game",
+    "start_url": "/",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "background_color": "#0a0a1a",
+    "theme_color": "#1a0033",
+    "icons": [
+      {
+        "src": "icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
