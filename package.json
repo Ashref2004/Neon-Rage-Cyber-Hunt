@@ -1,0 +1,12 @@
+{
+    "name": "neon-rage-cyber-hunt",
+    "version": "1.0.0",
+    "description": "Futuristic cyberpunk hack-and-slash action game",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.21.2"
+    }
+}
