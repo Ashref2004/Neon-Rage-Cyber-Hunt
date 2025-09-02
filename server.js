@@ -4,12 +4,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// Serve static files from the 'adem' folder
 app.use(express.static(path.join(__dirname, 'adem')));
 
-// Serve index.html as default
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'adem', 'a.html'));
+  res.sendFile(path.join(__dirname, 'a.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
