@@ -5,7 +5,237 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Rage: Cyber Hunt</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="index.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #000;
+    font-family: 'Courier New', monospace;
+    color: #0ff;
+    touch-action: none;
+    user-select: none;
+}
+
+#gameCanvas {
+    display: block;
+    background: linear-gradient(to bottom, #0a0a1a 0%, #1a0033 100%);
+}
+
+#uiContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#healthBar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 30px;
+    border: 2px solid #0ff;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#healthFill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #f00, #ff0);
+    transition: width 0.3s;
+}
+
+#scoreDisplay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+#comboCounter {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    color: #f0f;
+    text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#bulletTimeIndicator {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 100px;
+    height: 20px;
+    border: 1px solid #0ff;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#bulletTimeFill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #0ff, #00f);
+    transition: width 0.1s;
+}
+
+#startScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 20, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#gameTitle {
+    font-size: 72px;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    margin-bottom: 40px;
+    animation: pulse 2s infinite;
+}
+
+#startButton {
+    padding: 15px 40px;
+    font-size: 24px;
+    background: linear-gradient(to right, #0a0a1a, #1a0033);
+    color: #0ff;
+    border: 2px solid #0ff;
+    border-radius: 5px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s;
+}
+
+#startButton:hover {
+    background: linear-gradient(to right, #1a0033, #0a0a1a);
+    box-shadow: 0 0 15px #0ff;
+}
+
+#controlsInfo {
+    margin-top: 30px;
+    color: #0ff;
+    text-align: center;
+    line-height: 1.6;
+}
+
+#gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 20, 0.9);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#gameOverText {
+    font-size: 72px;
+    color: #f00;
+    text-shadow: 0 0 10px #f00, 0 0 20px #f00;
+    margin-bottom: 40px;
+}
+
+#restartButton {
+    padding: 15px 40px;
+    font-size: 24px;
+    background: linear-gradient(to right, #0a0a1a, #1a0033);
+    color: #0ff;
+    border: 2px solid #0ff;
+    border-radius: 5px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s;
+}
+
+#restartButton:hover {
+    background: linear-gradient(to right, #1a0033, #0a0a1a);
+    box-shadow: 0 0 15px #0ff;
+}
+
+#finalScore {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #0ff;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.neon-text {
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #0ff;
+}
+
+#mobileControls {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.mobile-btn {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 255, 255, 0.2);
+    border: 2px solid #0ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0ff;
+    font-size: 24px;
+    pointer-events: auto;
+    touch-action: manipulation;
+}
+
+#dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+}
+
+#upBtn { grid-column: 2; grid-row: 1; }
+#leftBtn { grid-column: 1; grid-row: 2; }
+#downBtn { grid-column: 2; grid-row: 3; }
+#rightBtn { grid-column: 3; grid-row: 2; }
+
+#actionBtns {
+    display: flex;
+    gap: 20px;
+}
+
+#jumpBtn, #attackBtn, #bulletTimeBtn {
+    width: 70px;
+    height: 70px;
+}
+    </style>
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
